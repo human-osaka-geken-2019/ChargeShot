@@ -159,12 +159,13 @@
     <ClCompile Include="Objects\Background.cpp" />
     <ClCompile Include="Objects\Bullet.cpp" />
     <ClCompile Include="Objects\CollisionInformation.cpp" />
+    <ClCompile Include="Objects\InstantaneousText.cpp" />
     <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Objects\Object2D.cpp" />
     <ClCompile Include="Objects\ObjectText.cpp" />
     <ClCompile Include="Objects\Player.cpp" />
     <ClCompile Include="Objects\Target.cpp" />
-    <ClCompile Include="Objects\TotalPoint.cpp" />
+    <ClCompile Include="Objects\PointTextCreater.cpp" />
     <ClCompile Include="Scenes\InGameScene.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
   </ItemGroup>
@@ -194,13 +195,14 @@
     <ClInclude Include="Objects\Background.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\CollisionInformation.h" />
+    <ClInclude Include="Objects\InstantaneousText.h" />
     <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Objects\Object2D.h" />
     <ClInclude Include="Objects\ObjectText.h" />
     <ClInclude Include="Objects\Player.h" />
     <ClInclude Include="Objects\SwitchEvent.h" />
     <ClInclude Include="Objects\Target.h" />
-    <ClInclude Include="Objects\TotalPoint.h" />
+    <ClInclude Include="Objects\PointTextCreater.h" />
     <ClInclude Include="Scenes\InGameScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
   </ItemGroup>

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Scene.h"
 #include "Target.h"
-#include "TotalPoint.h"
+#include "PointTextCreater.h"
 
 namespace chargeshot
 {

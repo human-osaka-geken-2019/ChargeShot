@@ -21,7 +21,7 @@ namespace chargeshot
 		m_rObjectIntegrator.Register(new Background(_T("BACKGROUND_01"), D3DXVECTOR2(0.4f, 0.0f)), LAYER_KIND::OPAQUENESS, -98);
 		m_rObjectIntegrator.Register(new Background(_T("BACKGROUND_02"), D3DXVECTOR2(1.0f, 0.0f)), LAYER_KIND::OPAQUENESS, -97);
 		m_rObjectIntegrator.Register(new Background(_T("BACKGROUND_03"), D3DXVECTOR2(0.0f, 0.0f)), LAYER_KIND::OPAQUENESS, -96);
-		m_rObjectIntegrator.Register(new TotalPoint(_T("POINT")), LAYER_KIND::UI, 100);
+		m_rObjectIntegrator.Register(new PointTextCreater(_T("POINT")), LAYER_KIND::UI, 100);
 		//m_rObjectIntegrator.Register(new Player(WindowMeasure::GetNormalizeVector(5.0f, 30.f)), LAYER_KIND::OPAQUENESS, 0);
 		m_rObjectIntegrator.Register(new Player(WindowMeasure::GetNormalizeVector(5.0f, 50.f)), LAYER_KIND::OPAQUENESS, 0);
 		//m_rObjectIntegrator.Register(new Player(WindowMeasure::GetNormalizeVector(5.0f, 70.f)), LAYER_KIND::OPAQUENESS, 0);
@@ -58,6 +58,7 @@ namespace chargeshot
 		CreateTexture(_T("BACKGROUND_03"), _T("Textures/InGame_background03.png"));
 
 		CreateFont(_T("POINT"), WindowMeasure::GetNormalize(1.8f, 6.0f), _T("IPAex–¾’©"));
+		CreateFont(_T("POINT_S"), WindowMeasure::GetNormalize(0.9f, 3.0f), _T("IPAex–¾’©"));
 
 		m_rGameFramework.AddFile(_T("Sounds/n28.mp3"), _T("BGM"), Sound::SoundType::BGM);
 		m_rGameFramework.AddSimultaneousFile(_T("Sounds/Charge.mp3"), _T("CHARGE"), Sound::SoundType::SE);

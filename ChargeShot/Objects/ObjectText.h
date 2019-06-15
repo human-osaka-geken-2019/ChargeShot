@@ -8,14 +8,30 @@
 namespace chargeshot
 {
 	using gameframework::GameFramework;
+	using gameframework::Color;
 	using gameframework::Stream;
+	using gameframework::tstring;
 
 	class ObjectText :public Object
 	{
 	public:
+		ObjectText(const TCHAR* pFontKey, UINT format = DT_CENTER);
+		ObjectText(const TCHAR* pFontKey, const D3DXVECTOR2& topLeft,
+			const tstring& stream, UINT format = DT_CENTER, const Color& color = 0xFFFFFFFF);
+
 		virtual ~ObjectText();
 
+		void Update()override;
 		void Render()override;
+
+		void SetTopLeft(const D3DXVECTOR2& topLeft);
+
+		void SetStream(const tstring& stream);
+		void AddStream(const tstring& stream);
+
+		void SetFormat(UINT format);
+
+		void SetColor(const Color& color);
 
 		virtual inline bool ShouldDestroyed()const
 		{
@@ -23,8 +39,6 @@ namespace chargeshot
 		}
 
 	protected:
-		ObjectText(const TCHAR* pFontKey, UINT format = DT_CENTER);
-
 		virtual void Finalize()override;
 
 		GameFramework& m_rGameFramework = GameFramework::CreateAndGetRef();

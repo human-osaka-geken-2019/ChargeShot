@@ -113,7 +113,10 @@
     <ClCompile Include="Objects\ObjectText.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\TotalPoint.cpp">
+    <ClCompile Include="Objects\PointTextCreater.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\InstantaneousText.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -217,7 +220,10 @@
     <ClInclude Include="Objects\ObjectText.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\TotalPoint.h">
+    <ClInclude Include="Objects\PointTextCreater.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\InstantaneousText.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
