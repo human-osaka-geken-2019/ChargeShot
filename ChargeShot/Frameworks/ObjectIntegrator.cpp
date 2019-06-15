@@ -43,6 +43,19 @@ namespace chargeshot
 		}
 	}
 
+	void ObjectIntegrator::ReleaseAll()
+	{
+		for (auto& rObjectDatas : m_objectDatas)
+		{
+			for (auto& rObjectData : rObjectDatas.second)
+			{
+				delete rObjectData;
+			}
+		}
+
+		m_objectDatas.clear();
+	}
+
 	ObjectIntegrator::ObjectData::ObjectData(Object* pObject, char zIndex)
 		:m_pObject(pObject), m_zIndex(zIndex)
 	{
@@ -57,19 +70,6 @@ namespace chargeshot
 	void ObjectIntegrator::Finalize()
 	{
 		ReleaseAll();
-	}
-
-	void ObjectIntegrator::ReleaseAll()
-	{
-		for (auto& rObjectDatas : m_objectDatas)
-		{
-			for (auto& rObjectData : rObjectDatas.second)
-			{
-				delete rObjectData;
-			}
-		}
-
-		m_objectDatas.clear();
 	}
 
 	void ObjectIntegrator::ReleaseDestroyed()

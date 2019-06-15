@@ -2,7 +2,9 @@
 #define IN_GAME_SCENE_H
 
 #include "Background.h"
+#include "CollisionChecker.h"
 #include "Player.h"
+#include "PointChecker.h"
 #include "Scene.h"
 #include "Target.h"
 #include "PointTextCreater.h"

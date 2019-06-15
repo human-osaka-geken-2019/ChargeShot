@@ -27,6 +27,8 @@ namespace chargeshot
 		void Update()override;
 		void Render()override;
 
+		void ReleaseAll();
+
 	private:
 		struct ObjectData
 		{
@@ -46,8 +48,6 @@ namespace chargeshot
 		ObjectIntegrator& operator=(const ObjectIntegrator& objectIntegrator) = delete;
 
 		void Finalize()override;
-
-		void ReleaseAll();
 
 		void ReleaseDestroyed();
 

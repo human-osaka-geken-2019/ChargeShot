@@ -29,6 +29,8 @@ namespace chargeshot
 
 		CollisionInformation* GetCollisionInformationPtr(const tstring& iColliderKey);
 
+		void ReleaseAll();
+
 		void ReleaseDestroyed();
 
 	private:
@@ -46,8 +48,6 @@ namespace chargeshot
 		void CheckAll();
 		bool CheckDouble(ICollider* pICollides, ICollider* pICollided);
 		bool CheckSingle(ICollider* pICollides, ICollider* pICollided);
-
-		void ReleaseAll();
 
 		std::unordered_map<tstring, CollisionInformation> m_collisionInformations;
 	};

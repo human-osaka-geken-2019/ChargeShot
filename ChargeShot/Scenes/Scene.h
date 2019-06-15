@@ -4,7 +4,6 @@
 #include <tchar.h>
 
 #include <GameFramework.h>
-
 #include "Object.h"
 #include "ObjectIntegrator.h"
 

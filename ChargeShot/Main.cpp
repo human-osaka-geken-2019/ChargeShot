@@ -5,6 +5,7 @@
 #include "CollisionChecker.h"
 #include "PointChecker.h"
 #include "SceneSwitcher.h"
+#include "SceneSwitchMediator.h"
 
 using namespace gameframework;
 using namespace chargeshot;
@@ -43,8 +44,13 @@ INT WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPST
 
 		rGameFramework.PrepareInFrame();
 
+		if (rGameFramework.KeyboardIsPressed(DIK_BACKSPACE))
+		{
+			SceneSwitchMediator::CreateAndGetRef().SendSwitchEvent(SCENE_KIND::IN_GAME);
+		}
+
 		rCollisionChecker.Update();
-		
+
 		rPointChecker.Update();
 
 		rSceneSwitcher.Update();

@@ -37,7 +37,9 @@ namespace chargeshot
 
 	void InGameScene::Finalize()
 	{
-		
+		CollisionChecker::CreateAndGetRef().ReleaseAll();
+
+		PointChecker::CreateAndGetRef().Zero();
 	}
 
 	void InGameScene::LoadResouces()

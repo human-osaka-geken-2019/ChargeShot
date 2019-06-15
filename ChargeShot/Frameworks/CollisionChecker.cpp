@@ -30,6 +30,11 @@ namespace chargeshot
 		return &m_collisionInformations[iColliderKey];
 	}
 
+	void CollisionChecker::ReleaseAll()
+	{
+		m_collisionInformations.clear();
+	}
+
 	void CollisionChecker::ReleaseDestroyed()
 	{
 		for (auto& rCollisionInformation : m_collisionInformations)
@@ -117,10 +122,5 @@ namespace chargeshot
 		}
 
 		return false;
-	}
-
-	void CollisionChecker::ReleaseAll()
-	{
-		m_collisionInformations.clear();
 	}
 }

@@ -28,6 +28,8 @@ namespace chargeshot
 
 	void Scene::ReleaseResources()
 	{
+		m_rObjectIntegrator.ReleaseAll();
+
 		for (auto& pKey : pTEXTURE_KEYs)
 		{
 			m_rGameFramework.ReleaseTexture(pKey);
