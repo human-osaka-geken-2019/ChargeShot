@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Frameworks">
+      <UniqueIdentifier>{7ca17f09-a63d-41fa-b162-bc24aa7b4a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{19bb2307-3a9e-457d-8dbf-20c4fbcbd17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{cb02a5f2-ab46-41a1-ab0d-ef2519094664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Constants">
+      <UniqueIdentifier>{655318f0-63d3-464b-a371-7e6db1264c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicEffects">
+      <UniqueIdentifier>{a6b90ae0-b70c-4824-87f5-9290fd25d705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicEffects\Parts">
+      <UniqueIdentifier>{a2556ec8-1d93-47bc-9828-0c6d5b59b59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicEffects\Behaviors">
+      <UniqueIdentifier>{079e48c9-250e-4c05-80a7-8d3bb7620e26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{5bed95f3-3b82-4c57-a950-00d329b6595a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Frameworks\ObjectIntegrator.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\SceneSwitcher.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\SceneSwitchMediator.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\InGameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Object2D.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Background.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\Counter_sec.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\WindowMeasure.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\QuakeCounter_sec.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Bullet.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\ClickEffect.cpp">
+      <Filter>GraphicEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\Cursor.cpp">
+      <Filter>GraphicEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\HoldEffect.cpp">
+      <Filter>GraphicEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\ChargeEffect.cpp">
+      <Filter>GraphicEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\Behaviors\LocaleOnCircumference.cpp">
+      <Filter>GraphicEffects\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\Behaviors\Move.cpp">
+      <Filter>GraphicEffects\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\Parts\ScalingFlashAbsorbedSquare.cpp">
+      <Filter>GraphicEffects\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\Parts\ScalingFlashSquare.cpp">
+      <Filter>GraphicEffects\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\Parts\SquareMoveToDest.cpp">
+      <Filter>GraphicEffects\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Target.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\CollisionChecker.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\CollisionInformation.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\PointChecker.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ObjectText.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\TotalPoint.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Frameworks\ObjectIntegrator.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Object.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants\LayerKind.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\SceneSwitcher.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\SceneSwitchMediator.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants\SceneKind.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\SwitchEvent.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\InGameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Object2D.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Background.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\Counter_sec.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\WindowMeasure.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\QuakeCounter_sec.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Player.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Bullet.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\ClickEffect.h">
+      <Filter>GraphicEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\Cursor.h">
+      <Filter>GraphicEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\HoldEffect.h">
+      <Filter>GraphicEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\ChargeEffect.h">
+      <Filter>GraphicEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\Behaviors\LocaleOnCircumference.h">
+      <Filter>GraphicEffects\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\Behaviors\Move.h">
+      <Filter>GraphicEffects\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\Parts\ScalingFlashAbsorbedSquare.h">
+      <Filter>GraphicEffects\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\Parts\ScalingFlashSquare.h">
+      <Filter>GraphicEffects\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\Parts\SquareMoveToDest.h">
+      <Filter>GraphicEffects\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Target.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\ICollider.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants\ColliderKind.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\CollisionChecker.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\CollisionInformation.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IMovement.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\PointChecker.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\ObjectText.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TotalPoint.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
