@@ -8,6 +8,7 @@
 
 #include "CollisionInformation.h"
 #include "ICollider.h"
+#include "IOnCollisionStay.h"
 #include "Object.h"
 
 namespace chargeshot
@@ -23,9 +24,11 @@ namespace chargeshot
 
 		~CollisionChecker();
 
-		void Register(const tstring& iColliderKey, ICollider* pICollider);
+		void Register(const tstring& iColliderKey, ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay = nullptr);
 
 		void Update();
+
+		void RunOnCollisionStay();
 
 		CollisionInformation* GetCollisionInformationPtr(const tstring& iColliderKey);
 

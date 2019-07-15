@@ -119,6 +119,18 @@
     <ClCompile Include="Objects\InstantaneousText.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\TargetWall.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Rect.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Frameworks\TargetFactory.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEffects\CollidingEffect.cpp">
+      <Filter>GraphicEffects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Frameworks\ObjectIntegrator.h">
@@ -225,6 +237,21 @@
     </ClInclude>
     <ClInclude Include="Objects\InstantaneousText.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TargetWall.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IOnCollisionStay.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Rect.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Frameworks\TargetFactory.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEffects\CollidingEffect.h">
+      <Filter>GraphicEffects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

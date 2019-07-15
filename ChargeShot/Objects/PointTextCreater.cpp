@@ -3,9 +3,10 @@
 namespace chargeshot
 {
 	PointTextCreater::PointTextCreater(const TCHAR* pFontKey) 
-		:ObjectText(pFontKey, DT_RIGHT)
+		:ObjectText(pFontKey, DT_LEFT)
 	{
 		SetTopLeft();
+		SetGradeTexts();
 	}
 
 	PointTextCreater::~PointTextCreater()
@@ -20,15 +21,32 @@ namespace chargeshot
 
 		if (!m_rPointChecker.IsPointGot()) return;
 
-		auto pPointText = new InstantaneousText(_T("POINT_S"), 30,
-			WindowMeasure::GetNormalizeVector(100.0f, 6.0f),
-			_T("+") + totstring(m_rPointChecker.GetPoint()), DT_RIGHT);
+		auto point = m_rPointChecker.GetPoint();
+
+		auto pPointText = new InstantaneousText(_T("POINT_L"), 50,
+			WindowMeasure::GetNormalizeVector(60.0f, 35.0f),
+			_T("+") + totstring(point), DT_CENTER);
 
 		ObjectIntegrator::CreateAndGetRef().Register(pPointText, LAYER_KIND::UI, 100);
+
+		auto gradeText = m_gradeTexts[(point - 1) / (PointChecker::POINT_MAX / m_gradeTexts.size())];
+
+		auto pPointEvalutionText = new InstantaneousText(_T("POINT_M"), 50,
+			WindowMeasure::GetNormalizeVector(60.0f, 65.0f), gradeText);
+
+		ObjectIntegrator::CreateAndGetRef().Register(pPointEvalutionText, LAYER_KIND::UI, 100);
 	}
 
 	void PointTextCreater::SetTopLeft()
 	{
-		m_pStream->SetTopLeft(WindowMeasure::GetNormalizeVector(100.0f, 0.0f));
+		m_pStream->SetTopLeft(WindowMeasure::GetNormalizeVector(15.0f, 46.0f));
+	}
+
+	void PointTextCreater::SetGradeTexts()
+	{
+		m_gradeTexts.push_back(_T("BAD"));
+		m_gradeTexts.push_back(_T("GOOD"));
+		m_gradeTexts.push_back(_T("GREAT"));
+		m_gradeTexts.push_back(_T("EXCELLENT"));
 	}
 }

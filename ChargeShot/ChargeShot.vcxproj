@@ -145,11 +145,13 @@
     <ClCompile Include="Frameworks\QuakeCounter_sec.cpp" />
     <ClCompile Include="Frameworks\SceneSwitcher.cpp" />
     <ClCompile Include="Frameworks\SceneSwitchMediator.cpp" />
+    <ClCompile Include="Frameworks\TargetFactory.cpp" />
     <ClCompile Include="Frameworks\WindowMeasure.cpp" />
     <ClCompile Include="GraphicEffects\Behaviors\LocaleOnCircumference.cpp" />
     <ClCompile Include="GraphicEffects\Behaviors\Move.cpp" />
     <ClCompile Include="GraphicEffects\ChargeEffect.cpp" />
     <ClCompile Include="GraphicEffects\ClickEffect.cpp" />
+    <ClCompile Include="GraphicEffects\CollidingEffect.cpp" />
     <ClCompile Include="GraphicEffects\Cursor.cpp" />
     <ClCompile Include="GraphicEffects\HoldEffect.cpp" />
     <ClCompile Include="GraphicEffects\Parts\ScalingFlashAbsorbedSquare.cpp" />
@@ -164,8 +166,10 @@
     <ClCompile Include="Objects\Object2D.cpp" />
     <ClCompile Include="Objects\ObjectText.cpp" />
     <ClCompile Include="Objects\Player.cpp" />
+    <ClCompile Include="Objects\Rect.cpp" />
     <ClCompile Include="Objects\Target.cpp" />
     <ClCompile Include="Objects\PointTextCreater.cpp" />
+    <ClCompile Include="Objects\TargetWall.cpp" />
     <ClCompile Include="Scenes\InGameScene.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
   </ItemGroup>
@@ -180,11 +184,13 @@
     <ClInclude Include="Frameworks\QuakeCounter_sec.h" />
     <ClInclude Include="Frameworks\SceneSwitcher.h" />
     <ClInclude Include="Frameworks\SceneSwitchMediator.h" />
+    <ClInclude Include="Frameworks\TargetFactory.h" />
     <ClInclude Include="Frameworks\WindowMeasure.h" />
     <ClInclude Include="GraphicEffects\Behaviors\LocaleOnCircumference.h" />
     <ClInclude Include="GraphicEffects\Behaviors\Move.h" />
     <ClInclude Include="GraphicEffects\ChargeEffect.h" />
     <ClInclude Include="GraphicEffects\ClickEffect.h" />
+    <ClInclude Include="GraphicEffects\CollidingEffect.h" />
     <ClInclude Include="GraphicEffects\Cursor.h" />
     <ClInclude Include="GraphicEffects\HoldEffect.h" />
     <ClInclude Include="GraphicEffects\Parts\ScalingFlashAbsorbedSquare.h" />
@@ -192,6 +198,7 @@
     <ClInclude Include="GraphicEffects\Parts\SquareMoveToDest.h" />
     <ClInclude Include="Interfaces\ICollider.h" />
     <ClInclude Include="Interfaces\IMovement.h" />
+    <ClInclude Include="Interfaces\IOnCollisionStay.h" />
     <ClInclude Include="Objects\Background.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\CollisionInformation.h" />
@@ -200,9 +207,11 @@
     <ClInclude Include="Objects\Object2D.h" />
     <ClInclude Include="Objects\ObjectText.h" />
     <ClInclude Include="Objects\Player.h" />
+    <ClInclude Include="Objects\Rect.h" />
     <ClInclude Include="Objects\SwitchEvent.h" />
     <ClInclude Include="Objects\Target.h" />
     <ClInclude Include="Objects\PointTextCreater.h" />
+    <ClInclude Include="Objects\TargetWall.h" />
     <ClInclude Include="Scenes\InGameScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include "ObjectIntegrator.h"
 #include "ObjectText.h"
 #include "Object2D.h"
+#include "Rect.h"
 #include "WindowMeasure.h"
 
 namespace chargeshot
@@ -21,15 +22,13 @@ namespace chargeshot
 		virtual void Update()override;
 
 	protected:
-		void InstantiateCounter();
-		void InstantiateRemainingBulletText();
-		void FormVertices(const D3DXVECTOR2& position);
-
 		virtual void LoadBullet();
 		virtual void ChargeBullet();
 		virtual void ShootBullet();
 
 		void UpdateRemainingBulletNumText();
+
+		virtual void FormChargeMetersVertices();
 
 		Bullet* m_pBullet = nullptr;
 
@@ -41,9 +40,21 @@ namespace chargeshot
 
 		ObjectIntegrator& m_rObjectIntegrator = ObjectIntegrator::CreateAndGetRef();
 
+		Rect* m_pChargeMeters[3];
+
+		float m_chargeMeterRadius = 0.0f;
+
 	private:
 		Player(const Player& player) = delete;
 		Player& operator=(Player& player) = delete;
+
+		void InstantiateCounter();
+		
+		void InstantiateRemainingBulletText();
+
+		void InstantiateChargeMeters();
+
+		void FormVertices(const D3DXVECTOR2& position);
 	};
 }
 

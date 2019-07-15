@@ -14,11 +14,11 @@ namespace chargeshot
 	public:
 		virtual ~ICollider() = default;
 
-		virtual Vertices* GetVerticesPtr() = 0;
+		virtual Vertices* GetVerticesPtr()const = 0;
 
-		virtual COLLIDER_KIND GetColliderKind() = 0;
+		virtual COLLIDER_KIND GetColliderKind()const = 0;
 
-		virtual D3DXVECTOR3 GetMovement() = 0;
+		virtual D3DXVECTOR3 GetMovement()const = 0;
 
 		virtual bool ShouldDestroyed()const = 0;
 		virtual void SetShouldDestroyed(bool shouldDestroyed)  = 0;

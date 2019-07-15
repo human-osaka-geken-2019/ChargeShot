@@ -25,7 +25,11 @@ namespace chargeshot
 
 		void SetTopLeft();
 
+		void SetGradeTexts();
+
 		PointChecker& m_rPointChecker = PointChecker::CreateAndGetRef();
+
+		std::vector<tstring> m_gradeTexts;
 	};
 }
 

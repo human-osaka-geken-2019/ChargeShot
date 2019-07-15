@@ -6,7 +6,6 @@
 #include <GameFramework.h>
 
 #include "CollisionChecker.h"
-#include "Target.h"
 #include "ObjectIntegrator.h"
 
 namespace chargeshot
@@ -30,7 +29,13 @@ namespace chargeshot
 
 		unsigned int GetTotalPoint()const;
 
+		bool AlreadyCorrided(const tstring& keys);
+		
+		bool AlreadyPassed(const tstring& keys);
+
 		void Zero();
+
+		static const unsigned int POINT_MAX = 500;
 
 	private:
 		PointChecker();
@@ -40,7 +45,7 @@ namespace chargeshot
 
 		void GetKeyTargetCollided();
 
-		void CreateNewTarget();
+		void ReadyForCreatingNewTarget();
 
 		bool AlreadyChecked(const tstring& collidedKey);
 
@@ -61,6 +66,7 @@ namespace chargeshot
 		std::vector<tstring> m_KeysInTarget;
 
 		std::vector<tstring> m_keysTargetAlreadyCorrided;
+		std::vector<tstring> m_keysTargetAlreadyPassed;
 
 		unsigned int m_point = 0;
 		unsigned int m_totalPoint = 0;

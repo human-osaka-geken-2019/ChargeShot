@@ -10,7 +10,7 @@ namespace chargeshot
 	public:
 		virtual ~IMovement() = default;
 
-		virtual D3DXVECTOR3 GetMovement() = 0;
+		virtual D3DXVECTOR3 GetMovement()const = 0;
 
 	protected:
 		IMovement() = default;

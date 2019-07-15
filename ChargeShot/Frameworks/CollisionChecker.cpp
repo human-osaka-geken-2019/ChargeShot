@@ -9,11 +9,11 @@ namespace chargeshot
 		Finalize();
 	}
 
-	void CollisionChecker::Register(const tstring& iColliderKey, ICollider* pICollider)
+	void CollisionChecker::Register(const tstring& iColliderKey, ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay)
 	{
 		m_collisionInformations.emplace(std::piecewise_construct,
 			std::forward_as_tuple(iColliderKey),
-			std::forward_as_tuple(pICollider));
+			std::forward_as_tuple(pICollider, pIOnCollisionStay));
 	}
 
 	void CollisionChecker::Update()
@@ -121,6 +121,26 @@ namespace chargeshot
 			return IsInner(*pICollides->GetVerticesPtr(), pICollided->GetVerticesPtr()->GetCenter());
 		}
 
+		if (pICollides->GetColliderKind() == COLLIDER_KIND::RECT &&
+			pICollided->GetColliderKind() == COLLIDER_KIND::RECT)
+		{
+			return Collides(*pICollides->GetVerticesPtr(), *pICollided->GetVerticesPtr());
+		}
+
 		return false;
+	}
+
+	void CollisionChecker::RunOnCollisionStay()
+	{
+		for (auto& rCollisionInformation : m_collisionInformations)
+		{
+			auto pIOnCollisionStay = rCollisionInformation.second.m_pIOnCollisionStay;
+			auto& collidedKeys = rCollisionInformation.second.m_colliderCollidedKeys;
+
+			if (pIOnCollisionStay && collidedKeys.size() > 0)
+			{
+				pIOnCollisionStay->OnCollisionStay(rCollisionInformation.second.m_colliderCollidedKeys);
+			}
+		}
 	}
 }

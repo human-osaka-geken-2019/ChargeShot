@@ -6,6 +6,7 @@
 #include <GameFramework.h>
 
 #include "ICollider.h"
+#include "IOnCollisionStay.h"
 
 namespace chargeshot
 {
@@ -16,9 +17,11 @@ namespace chargeshot
 	public:
 		CollisionInformation() = default;
 
-		CollisionInformation(ICollider* pICollider);
+		CollisionInformation(ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay = nullptr);
 
 		ICollider* m_pICollider = nullptr;
+
+		IOnCollisionStay* m_pIOnCollisionStay = nullptr;
 
 		std::vector<tstring> m_colliderCollidedKeys;
 	};

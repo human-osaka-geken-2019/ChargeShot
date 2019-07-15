@@ -20,7 +20,7 @@ namespace summonersaster
 		m_behaviorScheduler.Register(new Diffuse(diffuseAmount, 0.0f, 360.0f), BehaviorData::DEFAULT_START, m_startDelayFrame, BehaviorData::UNLIMITED);
 		m_behaviorScheduler.Register(new Scaling(scalingAmount), BehaviorData::DEFAULT_START, m_startDelayFrame, BehaviorData::UNLIMITED);
 		m_behaviorScheduler.Register(new ColorChange(LIFE_LIMIT, originalColor, destColor), BehaviorData::DEFAULT_START, m_startDelayFrame, BehaviorData::UNLIMITED);
-		m_behaviorScheduler.Register(new Flash(LIFE_LIMIT, 0, 255), BehaviorData::DEFAULT_START, m_startDelayFrame, BehaviorData::UNLIMITED);
+		m_behaviorScheduler.Register(new Flash(LIFE_LIMIT / 3, 0, 255), BehaviorData::DEFAULT_START, m_startDelayFrame, BehaviorData::UNLIMITED);
 	}
 
 	ScalingFlashAbsorbedSquare::~ScalingFlashAbsorbedSquare()

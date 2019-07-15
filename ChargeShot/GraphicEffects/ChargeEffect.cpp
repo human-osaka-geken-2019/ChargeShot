@@ -10,7 +10,7 @@ namespace chargeshot
 
 		for (int i = DFFUSE_EFFECT_NUM; i > 0; --i)
 		{
-			m_partScheduler.Register(new ScalingFlashAbsorbedSquare(_T("BULLET_CHARGE"), 0.0f, 0.0f, 0, Color(0xFF9999AA), Color(0xFF7777BB),
+			m_partScheduler.Register(new ScalingFlashAbsorbedSquare(_T("CHARGE_METER"), 0.0f, 0.0f, 0, Color(0xFF23FFFF), Color(0xFFFF23FF),
 				radius, radiusDifference, occurencePosition, requireFrameNum, lifeLimit));
 		}
 	}

@@ -23,7 +23,7 @@ namespace chargeshot
 
 		GameFramework::CreateAndGetRef().OneShotSimultaneous(_T("HIT_M"));
 
-		CreateNewTarget();
+		ReadyForCreatingNewTarget();
 	}
 
 	bool PointChecker::IsPointGot()const
@@ -39,6 +39,26 @@ namespace chargeshot
 	unsigned int PointChecker::GetTotalPoint()const
 	{
 		return m_totalPoint;
+	}
+
+	bool PointChecker::AlreadyCorrided(const tstring& keys)
+	{
+		for (auto& rKey : m_keysTargetAlreadyCorrided)
+		{
+			if (rKey == keys) return true;
+		}
+
+		return false;
+	}
+
+	bool PointChecker::AlreadyPassed(const tstring& keys)
+	{
+		for (auto& rKey : m_keysTargetAlreadyPassed)
+		{
+			if (rKey == keys) return true;
+		}
+
+		return false;
 	}
 
 	void PointChecker::Zero()
@@ -69,6 +89,8 @@ namespace chargeshot
 
 		for (auto& rCollidedKey : rCollidedKeys)
 		{
+			if (rCollidedKey.find(_T("BULLET")) == std::string::npos) continue;
+
 			if (AlreadyChecked(rCollidedKey)) continue;
 
 			m_keysTargetNewlyCorrided.push_back(rCollidedKey);
@@ -77,19 +99,10 @@ namespace chargeshot
 		return;
 	}
 	
-	void PointChecker::CreateNewTarget()
+	void PointChecker::ReadyForCreatingNewTarget()
 	{
 		m_pTargetICollider->SetShouldDestroyed(true);
 		m_rCollisionChecker.ReleaseDestroyed();
-
-		auto pTargetTmp = new Target(
-			D3DXVECTOR3(WindowMeasure::GetNormalizeX(90.0f), 0.0f, 0.9f),
-			WindowMeasure::GetNormalize(5.0f, static_cast<float>(rand() % 45) + 3.0f),
-			static_cast<float>(rand() % 3) + 2.0f);
-
-		ObjectIntegrator::CreateAndGetRef().Register(
-			pTargetTmp,
-			LAYER_KIND::OPAQUENESS, 0);
 	}
 
 	bool PointChecker::AlreadyChecked(const tstring& collidedKey)
@@ -123,6 +136,8 @@ namespace chargeshot
 				0.5f * m_pTargetVerticesTmp->GetSize().m_height - distanceCenters) continue;
 
 			m_pBulletVerticesTmp[rKeysCollided] = pBulletVerticesTmp;
+
+			m_keysTargetAlreadyPassed.push_back(rKeysCollided);
 		}
 
 		return;
@@ -133,7 +148,7 @@ namespace chargeshot
 		auto sizeRatio = pVertices->GetSize().m_height /
 			m_pTargetVerticesTmp->GetSize().m_height;
 
-		return static_cast<unsigned int>(500 * sizeRatio);
+		return static_cast<unsigned int>(POINT_MAX * sizeRatio);
 	}
 
 	void PointChecker::CalculatePoint()

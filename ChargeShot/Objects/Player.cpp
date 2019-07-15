@@ -3,12 +3,15 @@
 namespace chargeshot
 {
 	using namespace gameframework;
+	using namespace gameframework::algorithm;
 
 	Player::Player(const D3DXVECTOR2& position) :Object2D(_T("PLAYER"))
 	{
 		InstantiateCounter();
 		
 		InstantiateRemainingBulletText();
+
+		InstantiateChargeMeters();
 
 		FormVertices(position);
 	}
@@ -28,6 +31,8 @@ namespace chargeshot
 		UpdateRemainingBulletNumText();
 
 		m_pShotIntervalCounter->Update();
+
+		FormChargeMetersVertices();
 
 		if (m_rGameFramework.KeyboardIsPressed(SHOOT_KEY) ||
 			m_rGameFramework.MouseIsPressed(SHOOT_BUTTON))
@@ -52,28 +57,6 @@ namespace chargeshot
 
 			return;
 		}
-	}
-
-	void Player::InstantiateCounter()
-	{
-		m_pShotIntervalCounter = new Counter_sec(0.2f);
-	}
-
-	void Player::InstantiateRemainingBulletText()
-	{
-		m_pRemainingBulletNumText = new ObjectText(_T("POINT"),
-			WindowMeasure::GetNormalizeVector(0.0f, 0.0f), _T(""), DT_LEFT);
-
-		m_rObjectIntegrator.Register(m_pRemainingBulletNumText, LAYER_KIND::UI, 100);
-	}
-
-	void Player::FormVertices(const D3DXVECTOR2& position)
-	{
-		D3DXVECTOR2 centerVector2 = position;
-
-		D3DXVECTOR3 centerVector3(centerVector2.x, centerVector2.y, 0.9f);
-
-		m_pVertices->SetCenterAndSize(centerVector3, WindowMeasure::GetNormalize_x(4.0f));
 	}
 
 	void Player::LoadBullet()
@@ -122,5 +105,74 @@ namespace chargeshot
 
 		tstring bulletNumString = totstring(m_remainingBulletNum);
 		m_pRemainingBulletNumText->AddStream(bulletNumString);
+	}
+
+	void Player::FormChargeMetersVertices()
+	{
+		static float rotationDegreeZ = 0.0f;
+
+		RectSize mySize(m_pVertices->GetSize());
+		RectSize bulletSize((m_pBullet) ? m_pBullet->GetVerticesPtr()->GetSize() : mySize);
+		RectSize biggerSize = (mySize.m_height > bulletSize.m_height) ? mySize : bulletSize;
+
+		RectSize metersSize(WindowMeasure::GetNormalize_x(2.0f));
+
+		float radiusDifference = 0.8f * biggerSize.m_width - m_chargeMeterRadius;
+		float differenceSign = Tertiary(radiusDifference >= 0, +1.0f, -1.0f);
+		const float RADIUS_DIFFERENCE_LIMIT = WindowMeasure::GetNormalizeVector_x(0.2f).x;
+		m_chargeMeterRadius += Tertiary(fabsf(radiusDifference) > RADIUS_DIFFERENCE_LIMIT,
+			differenceSign * RADIUS_DIFFERENCE_LIMIT, radiusDifference);
+		D3DXVECTOR3 radiusVector(m_chargeMeterRadius, 0.0f, 0.0f);
+
+		D3DXVECTOR3 myCenter(m_pVertices->GetCenter());
+
+		float additionalDegree = 360 / _countof(m_pChargeMeters);
+
+		for (auto& pMeter : m_pChargeMeters)
+		{
+			int index = static_cast<int>(&pMeter - &m_pChargeMeters[0]);
+
+			D3DXVec3RotationZ(&radiusVector, (index == 0) ? rotationDegreeZ : additionalDegree);
+
+			auto& rVertices = *pMeter->GetVerticesPtr();
+			rVertices.SetCenterAndSize(myCenter + radiusVector, metersSize);
+			rVertices.GetCenter().z = myCenter.z;
+
+			rVertices.SetRotationZ(rotationDegreeZ + additionalDegree * index);
+		}
+
+		rotationDegreeZ += 5.0f;
+	}
+
+	void Player::InstantiateCounter()
+	{
+		m_pShotIntervalCounter = new Counter_sec(0.2f);
+	}
+
+	void Player::InstantiateRemainingBulletText()
+	{
+		m_pRemainingBulletNumText = new ObjectText(_T("POINT_M"),
+			WindowMeasure::GetNormalizeVector(15.0f, 50.1f), _T(""), DT_LEFT);
+
+		m_rObjectIntegrator.Register(m_pRemainingBulletNumText, LAYER_KIND::UI, 100);
+	}
+
+	void Player::InstantiateChargeMeters()
+	{
+		for (auto& rpChargeMeter : m_pChargeMeters)
+		{
+			rpChargeMeter = new Rect(_T("CHARGE_METER"));
+
+			m_rObjectIntegrator.Register(rpChargeMeter, LAYER_KIND::OPAQUENESS, 1);
+		}
+	}
+
+	void Player::FormVertices(const D3DXVECTOR2& position)
+	{
+		D3DXVECTOR2 centerVector2 = position;
+
+		D3DXVECTOR3 centerVector3(centerVector2.x, centerVector2.y, 0.9f);
+
+		m_pVertices->SetCenterAndSize(centerVector3, WindowMeasure::GetNormalize_x(4.0f));
 	}
 }

@@ -14,7 +14,7 @@ namespace gameframework
 	class HoldEffect :public GraphicEffect
 	{
 	public:
-		HoldEffect();
+		HoldEffect(const D3DXVECTOR3& startPosition);
 
 		~HoldEffect();
 

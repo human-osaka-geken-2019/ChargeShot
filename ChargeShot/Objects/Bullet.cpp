@@ -4,10 +4,14 @@ namespace chargeshot
 {
 	unsigned int Bullet::m_createNumber = 0;
 
+	using gameframework::HoldEffect;
+
 	Bullet::Bullet(const D3DXVECTOR3& startPosition)
 		:Object2D(_T("BULLET"), true), m_movement(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	{
 		RegisterOnCollisionChecker();
+
+		m_iColliderKey = CreateICollierKey();
 
 		InstantiateCounter();
 		FormVertices(startPosition);
@@ -37,34 +41,23 @@ namespace chargeshot
 		m_pVertices->SetSize(size);
 
 		m_rGameFramework.RegisterGraphicEffect(
-			new ChargeEffect(m_pVertices->GetCenter(), 
+			new ChargeEffect(m_pVertices->GetCenter(),
 				WindowMeasure::GetNormalizeX(20.0f), WindowMeasure::GetNormalizeX(1.0f),
 				50, 35));
 	}
 
-	float Bullet::GetChargeRatio()
+	void Bullet::OnCollisionStay(const std::vector<tstring>& colliderCollidedKeys)
 	{
-		return m_pChargeCounter->GetProcessingRatio();
-	}
+		if (m_rPointChecker.AlreadyPassed(GetColliderKey())) return;
 
-	Vertices* Bullet::GetVerticesPtr()
-	{
-		return m_pVertices;
-	}
+		for (auto collidedKey : colliderCollidedKeys)
+		{
+			if (collidedKey.find(_T("TARGET_WALL")) != tstring::npos) m_collidedWithWall = true;
+		}
 
-	COLLIDER_KIND Bullet::GetColliderKind()
-	{
-		return m_colliderKind;
-	}
+		if (!m_collidedWithWall) return;
 
-	D3DXVECTOR3 Bullet::GetMovement()
-	{
-		return m_movement;
-	}
-
-	void Bullet::SetIsShot(bool isShot)
-	{
-		m_isShot = isShot;
+		PerformCollided();
 	}
 
 	void Bullet::Finalize()
@@ -81,7 +74,26 @@ namespace chargeshot
 
 	void Bullet::Move()
 	{
+		if (m_collidedWithWall) return;
+
 		m_pVertices->GetCenter() += CalculateMovement();
+
+		auto effectPosition = m_pVertices->GetCenter();
+		effectPosition.z = 0.0f;
+
+		m_rGameFramework.RegisterGraphicEffect(new HoldEffect(effectPosition));
+	}
+
+	void Bullet::PerformCollided()
+	{
+		m_pVertices->SetColor(0x00FFFFFF);
+
+		auto effectPosition = m_pVertices->GetCenter();
+		effectPosition.z = 0.0f;
+
+		m_rGameFramework.RegisterGraphicEffect(new CollidingEffect(effectPosition));
+
+		SetShouldDestroyed(true);
 	}
 
 	bool Bullet::IsOutOfWindow()
@@ -93,13 +105,18 @@ namespace chargeshot
 
 	void Bullet::RegisterOnCollisionChecker()
 	{
-		tstring colliderKey = _T("BULLET");
-
-		colliderKey += totstring(m_createNumber);
-
-		CollisionChecker::CreateAndGetRef().Register(colliderKey, this);
-
 		++m_createNumber;
+
+		CollisionChecker::CreateAndGetRef().Register(CreateICollierKey(), this, this);
+	}
+
+	tstring Bullet::CreateICollierKey()
+	{
+		tstring iColliderKey = _T("BULLET");
+
+		iColliderKey += totstring(m_createNumber);
+
+		return iColliderKey;
 	}
 
 	void Bullet::InstantiateCounter()
@@ -109,6 +126,6 @@ namespace chargeshot
 
 	void Bullet::FormVertices(const D3DXVECTOR3& startPosition)
 	{
-		m_pVertices->SetCenter(startPosition);
+		m_pVertices->SetCenterAndSize(startPosition, WindowMeasure::GetNormalize(1.0f));
 	}
 }

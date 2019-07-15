@@ -6,6 +6,7 @@
 #include "PointChecker.h"
 #include "SceneSwitcher.h"
 #include "SceneSwitchMediator.h"
+#include "TargetFactory.h"
 
 using namespace gameframework;
 using namespace chargeshot;
@@ -36,6 +37,8 @@ INT WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPST
 
 	PointChecker& rPointChecker = PointChecker::CreateAndGetRef();
 
+	TargetFactory& rTargetFactory = TargetFactory::CreateAndGetRef();
+
 	while (!rWindow.ReceivedQuitMessage())
 	{
 		if (rWindow.ReceivedWinMessage()) continue;
@@ -52,9 +55,11 @@ INT WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPST
 		rCollisionChecker.Update();
 
 		rPointChecker.Update();
+		rTargetFactory.Update();
 
 		rSceneSwitcher.Update();
 		rObjectIntegrator.Update();
+		rCollisionChecker.RunOnCollisionStay();
 		rGameFramework.UpdateGraphicEffects();
 
 		rObjectIntegrator.Render();
