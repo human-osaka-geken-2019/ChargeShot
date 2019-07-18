@@ -9,6 +9,7 @@
 #include "ObjectText.h"
 #include "Object2D.h"
 #include "Rect.h"
+#include "SceneSwitchMediator.h"
 #include "WindowMeasure.h"
 
 namespace chargeshot
@@ -22,6 +23,10 @@ namespace chargeshot
 		virtual void Update()override;
 
 	protected:
+		virtual void Finalize()override;
+
+		virtual void JudgeAndChangeScene();
+
 		virtual void LoadBullet();
 		virtual void ChargeBullet();
 		virtual void ShootBullet();
@@ -36,6 +41,7 @@ namespace chargeshot
 
 		ObjectText* m_pRemainingBulletNumText = nullptr;
 
+		Counter_sec* m_pSceneChageDelayCounter = nullptr;
 		Counter_sec* m_pShotIntervalCounter = nullptr;
 
 		ObjectIntegrator& m_rObjectIntegrator = ObjectIntegrator::CreateAndGetRef();

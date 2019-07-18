@@ -3,7 +3,7 @@
 namespace chargeshot
 {
 	Target::Target(const D3DXVECTOR3& startPosition, const RectSize& size, float quakeTime_sec)
-		:Object2D(_T("TARGET")), m_movement(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+		:Object2D(nullptr), m_movement(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	{
 		RegisterOnCollisionChecker();
 
@@ -23,13 +23,22 @@ namespace chargeshot
 
 	void Target::Update()
 	{
-		ChangeColorOnHit();
+		ZeroMovement();
+
+		if (WallIsCollided()) return;
+
+		CalculateMovement();
 
 		Move();
+	}
+	
+	void Target::Move()
+	{
+		m_pVertices->GetCenter() += m_movement;
 
 		FormWallVertices();
 	}
-	
+
 	void Target::Finalize()
 	{
 		delete m_pQuakeMovingCounter;
@@ -37,22 +46,16 @@ namespace chargeshot
 
 	D3DXVECTOR3 Target::CalculateMovement()
 	{
-		m_movement = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		m_movement.y =
 			WindowMeasure::GetNormalizeY(100.0f * m_pQuakeMovingCounter->Update()) - 
 			m_pVertices->GetCenter().y;
 
+		for (auto& rpWall : m_pWalls)
+		{
+			rpWall->SetMovement(m_movement);
+		}
+
 		return m_movement;
-	}
-
-	void Target::Move()
-	{
-		m_pVertices->GetCenter() += CalculateMovement();
-	}
-
-	void Target::ChangeColorOnHit()
-	{
-		
 	}
 
 	void Target::FormWallVertices()
@@ -71,9 +74,24 @@ namespace chargeshot
 		m_pWalls[1]->GetVerticesPtr()->SetPosBybottomLeft(myBottomLeft, wallSize);
 	}
 	
+	void Target::ZeroMovement()
+	{
+		m_movement = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	}
+
+	bool Target::WallIsCollided()
+	{
+		for (auto& rpWall : m_pWalls)
+		{
+			if (rpWall->GetCollided()) return true;
+		}
+
+		return false;
+	}
+
 	void Target::RegisterOnCollisionChecker()
 	{
-		CollisionChecker::CreateAndGetRef().Register(I_COLLIDER_KEY, this);
+		CollisionChecker::CreateAndGetRef().Register(I_COLLIDER_KEY, this, nullptr, this);
 	}
 
 	CollisionInformation* Target::GetMyCollisionInformationPtr()

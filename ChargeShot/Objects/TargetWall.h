@@ -23,32 +23,39 @@ namespace chargeshot
 
 		virtual void Update()override;
 
+		virtual bool GetCollided();
+
 		virtual inline void SetMovement(D3DXVECTOR3 movement)
 		{
 			m_movement = movement;
 		}
 
-		virtual inline Vertices* GetVerticesPtr()const
+		virtual inline Vertices* GetVerticesPtr()const override
 		{
 			return m_pVertices;
 		}
 
-		virtual inline COLLIDER_KIND GetColliderKind()const
+		virtual inline COLLIDER_KIND GetColliderKind()const override
 		{
 			return m_colliderKind;
 		}
 
-		virtual inline D3DXVECTOR3 GetMovement()const
+		virtual inline D3DXVECTOR3 GetMovement()const override
 		{
 			return m_movement;
 		}
 
-		virtual inline bool ShouldDestroyed()const
+		virtual inline bool GetIsKinetic()const override
+		{
+			return false;
+		}
+
+		virtual inline bool ShouldDestroyed()const override
 		{
 			return m_shouldDestroyed;
 		}
 
-		virtual inline void SetShouldDestroyed(bool shouldDestroyed)
+		virtual inline void SetShouldDestroyed(bool shouldDestroyed) override
 		{
 			m_shouldDestroyed = shouldDestroyed;
 		}
@@ -77,6 +84,8 @@ namespace chargeshot
 		PointChecker& m_rPointChecker = PointChecker::CreateAndGetRef();
 
 		Counter_sec* m_pColorChangingDelayCounter = new Counter_sec(1.0f);
+
+		const DWORD DEFAULT_COLOR = 0xFFFFFFFF;
 
 	private:
 		TargetWall(const TargetWall& targetWall) = delete;

@@ -18,12 +18,14 @@ namespace chargeshot
 
 	Player::~Player()
 	{
-
+		Finalize();
 	}
 
 	void Player::Update()
 	{
 		m_pVertices->AddRotationZ(2.0f);
+
+		JudgeAndChangeScene();
 
 		static const auto SHOOT_KEY = DIK_RETURN;
 		static const auto SHOOT_BUTTON = DirectX8Mouse::DIM_LEFT;
@@ -57,6 +59,20 @@ namespace chargeshot
 
 			return;
 		}
+	}
+
+	void Player::Finalize()
+	{
+		delete m_pShotIntervalCounter;
+	}
+
+	void Player::JudgeAndChangeScene()
+	{
+		if (m_remainingBulletNum > 0) return;
+
+		if (m_pSceneChageDelayCounter->Update() < 1.0f) return;
+
+		SceneSwitchMediator::CreateAndGetRef().SendSwitchEvent(SCENE_KIND::RESULT);
 	}
 
 	void Player::LoadBullet()
@@ -112,8 +128,8 @@ namespace chargeshot
 		static float rotationDegreeZ = 0.0f;
 
 		RectSize mySize(m_pVertices->GetSize());
-		RectSize bulletSize((m_pBullet) ? m_pBullet->GetVerticesPtr()->GetSize() : mySize);
-		RectSize biggerSize = (mySize.m_height > bulletSize.m_height) ? mySize : bulletSize;
+		RectSize bulletSize((m_pBullet)? m_pBullet->GetVerticesPtr()->GetSize() : mySize);
+		RectSize biggerSize = algorithm::Tertiary(mySize.m_height > bulletSize.m_height, mySize, bulletSize);
 
 		RectSize metersSize(WindowMeasure::GetNormalize_x(2.0f));
 
@@ -146,6 +162,7 @@ namespace chargeshot
 
 	void Player::InstantiateCounter()
 	{
+		m_pSceneChageDelayCounter = new Counter_sec(1.2f);
 		m_pShotIntervalCounter = new Counter_sec(0.2f);
 	}
 
@@ -154,7 +171,7 @@ namespace chargeshot
 		m_pRemainingBulletNumText = new ObjectText(_T("POINT_M"),
 			WindowMeasure::GetNormalizeVector(15.0f, 50.1f), _T(""), DT_LEFT);
 
-		m_rObjectIntegrator.Register(m_pRemainingBulletNumText, LAYER_KIND::UI, 100);
+		m_rObjectIntegrator.Register(m_pRemainingBulletNumText, LAYER_KIND::UI, 90);
 	}
 
 	void Player::InstantiateChargeMeters()

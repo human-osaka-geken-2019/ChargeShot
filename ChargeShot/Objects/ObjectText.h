@@ -21,7 +21,7 @@ namespace chargeshot
 
 		virtual ~ObjectText();
 
-		void Update()override;
+		virtual void Update()override;
 		void Render()override;
 
 		void SetTopLeft(const D3DXVECTOR2& topLeft);
@@ -43,7 +43,7 @@ namespace chargeshot
 
 		GameFramework& m_rGameFramework = GameFramework::CreateAndGetRef();
 
-		const TCHAR* pFONT_KEY = nullptr;
+		const TCHAR* m_pFontKey = nullptr;
 
 		UINT m_format = DT_CENTER;
 

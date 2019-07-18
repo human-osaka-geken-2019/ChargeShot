@@ -24,7 +24,8 @@ namespace chargeshot
 
 		~CollisionChecker();
 
-		void Register(const tstring& iColliderKey, ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay = nullptr);
+		void Register(const tstring& iColliderKey, ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay = nullptr, IMovement* pIMovement = nullptr);
+		void Unregister(const tstring& iColliderKey);
 
 		void Update();
 
@@ -51,6 +52,8 @@ namespace chargeshot
 		void CheckAll();
 		bool CheckDouble(ICollider* pICollides, ICollider* pICollided);
 		bool CheckSingle(ICollider* pICollides, ICollider* pICollided);
+
+		CollisionInformation* SearchCollisionInformationPointer(const ICollider* pICollider);
 
 		std::unordered_map<tstring, CollisionInformation> m_collisionInformations;
 	};

@@ -11,6 +11,15 @@ namespace chargeshot
 	{
 		if (!m_switchEventPost.m_shouldSwitch) return;
 		
+		CheckIsSwitching();
+
+		if (m_isSwitching)
+		{
+			ToFadeOut();
+			
+			return;
+		}
+
 		Switch();
 	}
 
@@ -25,7 +34,7 @@ namespace chargeshot
 
 		rSceneSwitcherMediator.RegisterReceiver(&m_switchEventPost);
 
-		m_switchEventPost.m_nextSceneKind = SCENE_KIND::IN_GAME;
+		m_switchEventPost.m_nextSceneKind = SCENE_KIND::TITLE;
 
 		Switch();
 	}
@@ -37,6 +46,8 @@ namespace chargeshot
 
 	void SceneSwitcher::Switch()
 	{
+		m_rGameFramework.ReleaseAllGraphicEffect();
+
 		delete m_pScene;
 
 		CreateNextKindScene();
@@ -51,7 +62,7 @@ namespace chargeshot
 		switch (m_switchEventPost.m_nextSceneKind)
 		{
 		case SCENE_KIND::TITLE:
-			//m_pScene = new TitleScene();
+			m_pScene = new TitleScene();
 
 			break;
 
@@ -66,12 +77,24 @@ namespace chargeshot
 			break;
 
 		case SCENE_KIND::RESULT:
-			//m_pScene = new InGameScene();
+			m_pScene = new ResultScene();
 
 			break;
 
 		default:
 			break;
 		}
+
+		m_rObjectIntegrator.Register(m_pSceneFader = new SceneFader(), LAYER_KIND::FRONT, 0);
+	}
+
+	void SceneSwitcher::CheckIsSwitching()
+	{
+		m_isSwitching = gameframework::algorithm::Tertiary(m_pSceneFader->GetEnds(), false, true);
+	}
+
+	void SceneSwitcher::ToFadeOut()
+	{
+		m_pSceneFader->SetShouldFadeOut(true);
 	}
 }

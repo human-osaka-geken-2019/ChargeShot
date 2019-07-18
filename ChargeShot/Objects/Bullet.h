@@ -28,6 +28,8 @@ namespace chargeshot
 
 		virtual void Charge();
 
+		virtual void Move()override;
+
 		virtual inline float GetChargeRatio()const
 		{
 			return m_pChargeCounter->GetProcessingRatio();
@@ -38,19 +40,29 @@ namespace chargeshot
 			m_isShot = isShot;
 		}
 
-		virtual inline Vertices* GetVerticesPtr()const
+		virtual inline Vertices* GetVerticesPtr()const override
 		{
 			return m_pVertices;
 		}
 
-		virtual inline COLLIDER_KIND GetColliderKind()const
+		virtual inline COLLIDER_KIND GetColliderKind()const override
 		{
 			return m_colliderKind;
 		}
+
+		virtual inline void SetMovement(const D3DXVECTOR3& movement)override
+		{
+			m_movement = movement;
+		}
 		
-		virtual inline D3DXVECTOR3 GetMovement()const
+		virtual inline D3DXVECTOR3 GetMovement()const override
 		{
 			return m_movement;
+		}
+
+		virtual bool GetIsKinetic()const override
+		{
+			return true;
 		}
 
 		virtual inline bool ShouldDestroyed()const override
@@ -58,7 +70,7 @@ namespace chargeshot
 			return m_shouldDestroyed;
 		}
 
-		virtual inline void SetShouldDestroyed(bool shouldDestroyed)
+		virtual inline void SetShouldDestroyed(bool shouldDestroyed) override
 		{
 			m_shouldDestroyed = shouldDestroyed;
 		}
@@ -74,7 +86,6 @@ namespace chargeshot
 		virtual void Finalize()override;
 
 		virtual D3DXVECTOR3 CalculateMovement()override;
-		virtual void Move()override;
 
 		virtual void PerformCollided();
 

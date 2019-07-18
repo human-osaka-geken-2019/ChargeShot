@@ -24,19 +24,31 @@ namespace chargeshot
 
 		virtual void Update()override;
 
-		virtual inline Vertices* GetVerticesPtr()const
+		virtual void Move()override;
+
+		virtual inline Vertices* GetVerticesPtr()const override
 		{
 			return m_pVertices;
 		}
 
-		virtual inline COLLIDER_KIND GetColliderKind()const
+		virtual inline COLLIDER_KIND GetColliderKind()const override
 		{
 			return m_colliderKind;
 		}
 
-		virtual inline D3DXVECTOR3 GetMovement()const
+		virtual inline void SetMovement(const D3DXVECTOR3& movement)override
+		{
+			m_movement = movement;
+		}
+
+		virtual inline D3DXVECTOR3 GetMovement()const override
 		{
 			return m_movement;
+		}
+
+		virtual inline bool GetIsKinetic()const override
+		{
+			return false;
 		}
 
 		virtual inline bool ShouldDestroyed()const override
@@ -55,11 +67,12 @@ namespace chargeshot
 		virtual void Finalize()override;
 
 		virtual D3DXVECTOR3 CalculateMovement()override;
-		virtual void Move()override;
-
-		virtual void ChangeColorOnHit();
 
 		virtual void FormWallVertices();
+
+		virtual void ZeroMovement();
+
+		virtual bool WallIsCollided();
 
 		const tstring I_COLLIDER_KEY = _T("TARGET");
 
@@ -74,6 +87,7 @@ namespace chargeshot
 		TargetWall* m_pWalls[2];
 
 		ObjectIntegrator& m_rObjectIntegrator = ObjectIntegrator::CreateAndGetRef();
+
 	private:
 		Target(const Target& target) = delete;
 		Target& operator=(Target& target) = delete;

@@ -3,13 +3,13 @@
 
 #include <GameFramework.h>
 
-#include "ObjectText.h"
+#include "FlashText.h"
 #include "PointChecker.h"
 #include "WindowMeasure.h"
 
 namespace chargeshot
 {
-	class InstantaneousText :public ObjectText
+	class InstantaneousText :public FlashText
 	{
 	public:
 		InstantaneousText(const TCHAR* pFontKey, int flashFrameMax, const D3DXVECTOR2& topLeft,
@@ -19,7 +19,6 @@ namespace chargeshot
 		virtual void Update()override;
 
 	protected:
-		const int FLASH_FRAME_MAX;
 		int m_flashFrameCount = 0;
 
 	private:

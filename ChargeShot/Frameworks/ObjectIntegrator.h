@@ -27,6 +27,8 @@ namespace chargeshot
 		void Update()override;
 		void Render()override;
 
+		virtual void RenderFront();
+
 		void ReleaseAll();
 
 	private:

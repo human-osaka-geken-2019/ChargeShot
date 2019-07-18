@@ -20,6 +20,8 @@ namespace chargeshot
 
 		virtual D3DXVECTOR3 GetMovement()const = 0;
 
+		virtual bool GetIsKinetic()const = 0;
+
 		virtual bool ShouldDestroyed()const = 0;
 		virtual void SetShouldDestroyed(bool shouldDestroyed)  = 0;
 

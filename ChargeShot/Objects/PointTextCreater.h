@@ -19,6 +19,14 @@ namespace chargeshot
 
 		void Update()override;
 
+	protected:
+		virtual void CreateTotalScoreString();
+		virtual void CreateScoreString(int point, int flashFrameMax);
+
+		PointChecker& m_rPointChecker = PointChecker::CreateAndGetRef();
+
+		std::vector<tstring> m_gradeTexts;
+
 	private:
 		PointTextCreater(const PointTextCreater& pointTextCreater) = delete;
 		PointTextCreater& operator=(PointTextCreater& pointTextCreater) = delete;
@@ -26,10 +34,6 @@ namespace chargeshot
 		void SetTopLeft();
 
 		void SetGradeTexts();
-
-		PointChecker& m_rPointChecker = PointChecker::CreateAndGetRef();
-
-		std::vector<tstring> m_gradeTexts;
 	};
 }
 

@@ -28,9 +28,14 @@ namespace chargeshot
 
 		if (!m_isShot) return;
 
+		CalculateMovement();
+
 		Move();
 
-		if (IsOutOfWindow()) m_shouldDestroyed = true;
+		if (IsOutOfWindow())
+		{
+			m_shouldDestroyed = true;
+		}
 	}
 
 	void Bullet::Charge()
@@ -46,8 +51,22 @@ namespace chargeshot
 				50, 35));
 	}
 
+	void Bullet::Move()
+	{
+		if (m_collidedWithWall) return;
+
+		m_pVertices->GetCenter() += m_movement;
+
+		auto effectPosition = m_pVertices->GetCenter();
+		effectPosition.z = 0.0f;
+
+		m_rGameFramework.RegisterGraphicEffect(new HoldEffect(effectPosition));
+	}
+
 	void Bullet::OnCollisionStay(const std::vector<tstring>& colliderCollidedKeys)
 	{
+		CollisionChecker::GetRef().Unregister(m_iColliderKey);
+
 		if (m_rPointChecker.AlreadyPassed(GetColliderKey())) return;
 
 		for (auto collidedKey : colliderCollidedKeys)
@@ -70,18 +89,6 @@ namespace chargeshot
 		static const D3DXVECTOR3 MOVEMENT_sec(WindowMeasure::GetNormalizeX(200.0f), 0.0f, 0.0f);
 
 		return m_movement = MOVEMENT_sec * m_rGameFramework.DeltaTime_sec();
-	}
-
-	void Bullet::Move()
-	{
-		if (m_collidedWithWall) return;
-
-		m_pVertices->GetCenter() += CalculateMovement();
-
-		auto effectPosition = m_pVertices->GetCenter();
-		effectPosition.z = 0.0f;
-
-		m_rGameFramework.RegisterGraphicEffect(new HoldEffect(effectPosition));
 	}
 
 	void Bullet::PerformCollided()
@@ -107,7 +114,7 @@ namespace chargeshot
 	{
 		++m_createNumber;
 
-		CollisionChecker::CreateAndGetRef().Register(CreateICollierKey(), this, this);
+		CollisionChecker::CreateAndGetRef().Register(CreateICollierKey(), this, this, this);
 	}
 
 	tstring Bullet::CreateICollierKey()

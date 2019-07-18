@@ -4,7 +4,7 @@ namespace chargeshot
 {
 	InstantaneousText::InstantaneousText(const TCHAR* pFontKey, int flashFrameMax, const D3DXVECTOR2& topLeft,
 		const tstring& stream, UINT format, const Color& color)
-		:ObjectText(pFontKey, topLeft, stream, format, color), FLASH_FRAME_MAX(flashFrameMax)
+		:FlashText(pFontKey, flashFrameMax, topLeft, stream, format, color)
 	{
 
 	}

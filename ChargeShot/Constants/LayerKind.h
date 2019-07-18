@@ -7,7 +7,8 @@ namespace chargeshot
 	{
 		OPAQUENESS,
 		TRANSPARENCY,
-		UI
+		UI,
+		FRONT
 	};
 }
 

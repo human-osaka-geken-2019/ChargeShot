@@ -21,8 +21,6 @@ namespace chargeshot
 
 		if (!m_isPointGot) return;
 
-		GameFramework::CreateAndGetRef().OneShotSimultaneous(_T("HIT_M"));
-
 		ReadyForCreatingNewTarget();
 	}
 
@@ -66,7 +64,10 @@ namespace chargeshot
 		m_totalPoint = m_point = 0;
 
 		m_keysTargetAlreadyCorrided.clear();
-		m_keysTargetAlreadyCorrided.shrink_to_fit();
+
+		m_keysTargetAlreadyPassed.clear();
+
+		m_points.clear();
 	}
 
 	PointChecker::PointChecker()
@@ -78,6 +79,8 @@ namespace chargeshot
 	{
 		auto pTargetInformation =
 			m_rCollisionChecker.GetCollisionInformationPtr(_T("TARGET"));
+
+		if (!pTargetInformation) return;
 
 		m_pTargetICollider = pTargetInformation->m_pICollider;
 
@@ -132,8 +135,24 @@ namespace chargeshot
 
 			auto distanceCenters = fabsf(pBulletVerticesTmp->GetCenter().y - m_pTargetVerticesTmp->GetCenter().y);
 
+			auto isPlus = algorithm::Tertiary(pBulletVerticesTmp->GetCenter().y - m_pTargetVerticesTmp->GetCenter().y >= 0, true, false);
+
 			if (0.5f * pBulletVerticesTmp->GetSize().m_height >
-				0.5f * m_pTargetVerticesTmp->GetSize().m_height - distanceCenters) continue;
+				0.5f * m_pTargetVerticesTmp->GetSize().m_height - distanceCenters)
+			{
+				tstring colliderKeys[] = 
+				{
+					m_keysTargetNewlyCorrided[0],
+					algorithm::Tertiary(isPlus, _T("TARGET_WALL_TOP"), _T("TARGET_WALL_BOTTOM"))
+				};
+
+				for (int i = 0; i < _countof(colliderKeys); ++i)
+				{
+					m_rCollisionChecker.GetCollisionInformationPtr(colliderKeys[1 - i])->m_colliderCollidedKeys.push_back(colliderKeys[i]);
+				}
+
+				continue;
+			}
 
 			m_pBulletVerticesTmp[rKeysCollided] = pBulletVerticesTmp;
 
@@ -156,6 +175,8 @@ namespace chargeshot
 		for (auto& rpVertices : m_pBulletVerticesTmp)
 		{
 			m_point = CalculatePointByBulletSize(rpVertices.second);
+
+			m_points.push_back(m_point);
 
 			m_totalPoint += m_point;
 

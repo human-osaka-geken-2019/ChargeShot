@@ -52,20 +52,26 @@ INT WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPST
 			SceneSwitchMediator::CreateAndGetRef().SendSwitchEvent(SCENE_KIND::IN_GAME);
 		}
 
-		rCollisionChecker.Update();
-
-		rPointChecker.Update();
-		rTargetFactory.Update();
-
 		rSceneSwitcher.Update();
+
 		rObjectIntegrator.Update();
-		rCollisionChecker.RunOnCollisionStay();
+		rTargetFactory.Update();
 		rGameFramework.UpdateGraphicEffects();
 
 		rObjectIntegrator.Render();
 		rGameFramework.RenderGraphicEffects();
+		rObjectIntegrator.RenderFront();
+
+		rCollisionChecker.Update();
+		rPointChecker.Update();
+		rCollisionChecker.RunOnCollisionStay();
 
 		rGameFramework.FinishInFrame();
 	}
+
+	SceneSwitcher::ReleaseInstance();
+
+	Sleep(1000);
+
 	return 0;
 }

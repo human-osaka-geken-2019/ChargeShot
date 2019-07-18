@@ -2,8 +2,8 @@
 
 namespace chargeshot
 {
-	CollisionInformation::CollisionInformation(ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay)
-		:m_pICollider(pICollider), m_pIOnCollisionStay(pIOnCollisionStay)
+	CollisionInformation::CollisionInformation(ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay, IMovement* pIMovement)
+		:m_pICollider(pICollider), m_pIOnCollisionStay(pIOnCollisionStay), m_pIMovement(pIMovement)
 	{
 
 	}

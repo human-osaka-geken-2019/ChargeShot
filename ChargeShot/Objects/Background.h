@@ -11,7 +11,7 @@ namespace chargeshot
 	class Background :public Object2D
 	{
 	public:
-		Background(const TCHAR* pTextureKey = nullptr, const D3DXVECTOR2& scrolling_sec = D3DXVECTOR2(0.0f, 0.0f));
+		Background(const TCHAR* pTextureKey = nullptr, const D3DXVECTOR2& scrolling_sec = D3DXVECTOR2(0.0f, 0.0f), float z = 1.0f);
 
 		virtual ~Background();
 
@@ -27,7 +27,7 @@ namespace chargeshot
 		Background(const Background& background) = delete;
 		Background& operator=(Background& background) = delete;
 
-		void FormVertices();
+		void FormVertices(float z);
 	};
 }
 

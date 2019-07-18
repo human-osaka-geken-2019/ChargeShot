@@ -10,14 +10,15 @@ namespace chargeshot
 	public:
 		virtual ~IMovement() = default;
 
+		virtual void SetMovement(const D3DXVECTOR3& movement) = 0;
 		virtual D3DXVECTOR3 GetMovement()const = 0;
+
+		virtual void Move() = 0;
 
 	protected:
 		IMovement() = default;
 
 		virtual D3DXVECTOR3 CalculateMovement() = 0;
-
-		virtual void Move() = 0;
 
 	private:
 		IMovement(const IMovement& iMovement) = delete;

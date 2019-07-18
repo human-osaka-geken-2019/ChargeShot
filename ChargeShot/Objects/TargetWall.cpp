@@ -19,6 +19,12 @@ namespace chargeshot
 	{
 		JudgeAndChangeColor();
 	}
+
+	bool TargetWall::GetCollided()
+	{
+		return (m_pVertices->GetColor().GetColorCode() != DEFAULT_COLOR);
+	}
+
 	void TargetWall::OnCollisionStay(const std::vector<tstring>& colliderCollidedKeys)
 	{
 		bool collidedWithBullet = false;
@@ -27,7 +33,10 @@ namespace chargeshot
 		{
 			if (collidedKey.find(_T("BULLET")) != tstring::npos) collidedWithBullet = true;
 
-			if (m_rPointChecker.AlreadyPassed(collidedKey)) collidedWithBullet = false;
+			if (m_rPointChecker.AlreadyPassed(collidedKey))
+			{
+				collidedWithBullet = false;
+			}
 		}
 
 		if (!collidedWithBullet) return;
@@ -45,8 +54,6 @@ namespace chargeshot
 	void TargetWall::JudgeAndChangeColor()
 	{
 		auto& rColor = m_pVertices->GetColor();
-
-		const auto DEFAULT_COLOR = 0xFFFFFFFF;
 
 		if (rColor.GetColorCode() == DEFAULT_COLOR) return;
 
@@ -66,7 +73,7 @@ namespace chargeshot
 	{
 		auto pMissText = new InstantaneousText(_T("POINT_L"), 50,
 			WindowMeasure::GetNormalizeVector(60.0f, 35.0f),
-			_T("MISS"), DT_CENTER);
+			_T("MISS"), DT_CENTER, 0xFFFF6060);
 
 		ObjectIntegrator::CreateAndGetRef().Register(pMissText, LAYER_KIND::UI, 100);
 	}

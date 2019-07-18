@@ -9,11 +9,16 @@ namespace chargeshot
 		Finalize();
 	}
 
-	void CollisionChecker::Register(const tstring& iColliderKey, ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay)
+	void CollisionChecker::Register(const tstring& iColliderKey, ICollider* pICollider, IOnCollisionStay* pIOnCollisionStay, IMovement* pIMovement)
 	{
 		m_collisionInformations.emplace(std::piecewise_construct,
 			std::forward_as_tuple(iColliderKey),
-			std::forward_as_tuple(pICollider, pIOnCollisionStay));
+			std::forward_as_tuple(pICollider, pIOnCollisionStay, pIMovement));
+	}
+
+	void CollisionChecker::Unregister(const tstring& iColliderKey)
+	{
+		m_collisionInformations.erase(iColliderKey);
 	}
 
 	void CollisionChecker::Update()
@@ -27,6 +32,8 @@ namespace chargeshot
 
 	CollisionInformation* CollisionChecker::GetCollisionInformationPtr(const tstring& iColliderKey)
 	{
+		if (m_collisionInformations.count(iColliderKey) == 0) return nullptr;
+
 		return &m_collisionInformations[iColliderKey];
 	}
 
@@ -46,6 +53,23 @@ namespace chargeshot
 			ReleaseDestroyed();
 
 			return;
+		}
+	}
+
+	void CollisionChecker::RunOnCollisionStay()
+	{
+		//OnCollisionStayでcollisionInformationが書き替えらる時のため
+		auto collisionInformationsCopy = m_collisionInformations;
+
+		for (auto& rCollisionInformation : collisionInformationsCopy)
+		{
+			auto pIOnCollisionStay = rCollisionInformation.second.m_pIOnCollisionStay;
+			auto& collidedKeys = rCollisionInformation.second.m_colliderCollidedKeys;
+
+			if (pIOnCollisionStay && collidedKeys.size() > 0)
+			{
+				pIOnCollisionStay->OnCollisionStay(rCollisionInformation.second.m_colliderCollidedKeys);
+			}
 		}
 	}
 
@@ -107,7 +131,7 @@ namespace chargeshot
 
 		for (int i = 0; i <= indexMax; ++i)
 		{
-			if (CheckSingle(pIColliders[i], pIColliders[indexMax - i])) return true;;
+			if (CheckSingle(pIColliders[i], pIColliders[indexMax - i])) return true;
 		}
 
 		return false;
@@ -115,32 +139,59 @@ namespace chargeshot
 
 	bool CollisionChecker::CheckSingle(ICollider* pICollides, ICollider* pICollided)
 	{
-		if (pICollides->GetColliderKind() == COLLIDER_KIND::RECT &&
-			pICollided->GetColliderKind() == COLLIDER_KIND::POINT)
+		Vertices* pCollidesVertices = nullptr;
+		GameFrameworkFactory::Create(&pCollidesVertices);
+
+		auto& rCollidesVertices = *pICollides->GetVerticesPtr();
+
+		pCollidesVertices->SetSize(rCollidesVertices.GetSize());
+
+		bool collided = false;
+
+		int divideNum = 3;
+
+		auto collidesOneDivideMovement = pICollides->GetMovement() / static_cast<float>(divideNum);
+
+		for (int i = divideNum; i >= 0; --i)
 		{
-			return IsInner(*pICollides->GetVerticesPtr(), pICollided->GetVerticesPtr()->GetCenter());
+			auto collidesMovement = static_cast<float>(i) * collidesOneDivideMovement;
+
+			pCollidesVertices->SetCenter(rCollidesVertices.GetCenter() - collidesMovement);
+			pCollidesVertices->SetRotationZ(0);
+
+			if (pICollides->GetColliderKind() == COLLIDER_KIND::RECT &&
+				pICollided->GetColliderKind() == COLLIDER_KIND::POINT)
+			{
+				collided = IsInner(*pCollidesVertices, pICollided->GetVerticesPtr()->GetCenter());
+			}
+
+			if (pICollides->GetColliderKind() == COLLIDER_KIND::RECT &&
+				pICollided->GetColliderKind() == COLLIDER_KIND::RECT)
+			{
+				collided = Collides(*pCollidesVertices, *pICollided->GetVerticesPtr());
+			}
+
+			if (!collided) continue;
+
+			if (!pICollides->GetIsKinetic()) break;
+
+			pICollides->GetVerticesPtr()->SetCenter(pCollidesVertices->GetCenter());
+
+			break;
 		}
 
-		if (pICollides->GetColliderKind() == COLLIDER_KIND::RECT &&
-			pICollided->GetColliderKind() == COLLIDER_KIND::RECT)
-		{
-			return Collides(*pICollides->GetVerticesPtr(), *pICollided->GetVerticesPtr());
-		}
+		delete pCollidesVertices;
 
-		return false;
+		return collided;
 	}
 
-	void CollisionChecker::RunOnCollisionStay()
+	CollisionInformation* CollisionChecker::SearchCollisionInformationPointer(const ICollider* pICollider)
 	{
-		for (auto& rCollisionInformation : m_collisionInformations)
+		for (auto& rInformation : m_collisionInformations)
 		{
-			auto pIOnCollisionStay = rCollisionInformation.second.m_pIOnCollisionStay;
-			auto& collidedKeys = rCollisionInformation.second.m_colliderCollidedKeys;
-
-			if (pIOnCollisionStay && collidedKeys.size() > 0)
-			{
-				pIOnCollisionStay->OnCollisionStay(rCollisionInformation.second.m_colliderCollidedKeys);
-			}
+			if (rInformation.second.m_pICollider == pICollider) return &rInformation.second;
 		}
+
+		return nullptr;
 	}
 }

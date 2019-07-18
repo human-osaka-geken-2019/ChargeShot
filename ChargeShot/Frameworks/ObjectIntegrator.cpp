@@ -23,23 +23,45 @@ namespace chargeshot
 	{
 		ReleaseDestroyed();
 
+		std::vector<Object*> pOjects;
+
 		for (auto& rObjectDatas : m_objectDatas)
 		{
 			for (auto& rObjectData : rObjectDatas.second)
 			{
-				rObjectData->m_pObject->Update();
+				pOjects.push_back(rObjectData->m_pObject);
 			}
+		}
+
+		for (auto& pOject : pOjects)
+		{
+			pOject->Update();
 		}
 	}
 
 	void ObjectIntegrator::Render()
 	{
-		for (auto& rObjectDatas : m_objectDatas)
+		LAYER_KIND layerKinds[] =
 		{
-			for (auto& rObjectData : rObjectDatas.second)
+			LAYER_KIND::OPAQUENESS,
+			LAYER_KIND::TRANSPARENCY,
+			LAYER_KIND::UI
+		};
+
+		for (auto& rlayerKind : layerKinds)
+		{
+			for (auto& rObjectData : m_objectDatas[rlayerKind])
 			{
 				rObjectData->m_pObject->Render();
 			}
+		}
+	}
+
+	void ObjectIntegrator::RenderFront()
+	{
+		for (auto& rObjectData : m_objectDatas[LAYER_KIND::FRONT])
+		{
+			rObjectData->m_pObject->Render();
 		}
 	}
 

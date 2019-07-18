@@ -14,7 +14,7 @@ namespace gameframework
 	class HoldEffect :public GraphicEffect
 	{
 	public:
-		HoldEffect(const D3DXVECTOR3& startPosition);
+		HoldEffect(const D3DXVECTOR3& startPosition, const TCHAR* pTexturePath = _T("中空き円"));
 
 		~HoldEffect();
 

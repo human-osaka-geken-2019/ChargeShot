@@ -161,17 +161,23 @@
     <ClCompile Include="Objects\Background.cpp" />
     <ClCompile Include="Objects\Bullet.cpp" />
     <ClCompile Include="Objects\CollisionInformation.cpp" />
+    <ClCompile Include="Objects\FlashText.cpp" />
+    <ClCompile Include="Objects\GameTitle.cpp" />
     <ClCompile Include="Objects\InstantaneousText.cpp" />
     <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Objects\Object2D.cpp" />
     <ClCompile Include="Objects\ObjectText.cpp" />
     <ClCompile Include="Objects\Player.cpp" />
     <ClCompile Include="Objects\Rect.cpp" />
+    <ClCompile Include="Objects\ResultPointTextCreater.cpp" />
+    <ClCompile Include="Objects\SceneFader.cpp" />
     <ClCompile Include="Objects\Target.cpp" />
     <ClCompile Include="Objects\PointTextCreater.cpp" />
     <ClCompile Include="Objects\TargetWall.cpp" />
     <ClCompile Include="Scenes\InGameScene.cpp" />
+    <ClCompile Include="Scenes\ResultScene.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
+    <ClCompile Include="Scenes\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants\ColliderKind.h" />
@@ -202,18 +208,24 @@
     <ClInclude Include="Objects\Background.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\CollisionInformation.h" />
+    <ClInclude Include="Objects\FlashText.h" />
+    <ClInclude Include="Objects\GameTitle.h" />
     <ClInclude Include="Objects\InstantaneousText.h" />
     <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Objects\Object2D.h" />
     <ClInclude Include="Objects\ObjectText.h" />
     <ClInclude Include="Objects\Player.h" />
     <ClInclude Include="Objects\Rect.h" />
+    <ClInclude Include="Objects\ResultPointTextCreater.h" />
+    <ClInclude Include="Objects\SceneFader.h" />
     <ClInclude Include="Objects\SwitchEvent.h" />
     <ClInclude Include="Objects\Target.h" />
     <ClInclude Include="Objects\PointTextCreater.h" />
     <ClInclude Include="Objects\TargetWall.h" />
     <ClInclude Include="Scenes\InGameScene.h" />
+    <ClInclude Include="Scenes\ResultScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

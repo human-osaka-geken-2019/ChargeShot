@@ -5,9 +5,9 @@
 #include "CollisionChecker.h"
 #include "Player.h"
 #include "PointChecker.h"
+#include "PointTextCreater.h"
 #include "Scene.h"
 #include "Target.h"
-#include "PointTextCreater.h"
 
 namespace chargeshot
 {

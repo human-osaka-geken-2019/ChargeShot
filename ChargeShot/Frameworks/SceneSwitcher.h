@@ -5,9 +5,13 @@
 
 #include "InGameScene.h"
 #include "Object.h"
+#include "ObjectIntegrator.h"
+#include "ResultScene.h"
 #include "Scene.h"
+#include "SceneFader.h"
 #include "SceneKind.h"
 #include "SceneSwitchMediator.h"
+#include "TitleScene.h"
 
 namespace chargeshot
 {
@@ -35,11 +39,23 @@ namespace chargeshot
 
 		void CreateNextKindScene();
 
+		void CheckIsSwitching();
+
+		void ToFadeOut();
+
 		SCENE_KIND m_currentSceneKind = SCENE_KIND::IN_GAME;
 
 		SwitchEvent m_switchEventPost;
 
-		Scene* m_pScene;
+		Scene* m_pScene = nullptr;
+
+		SceneFader* m_pSceneFader = nullptr;
+		
+		bool m_isSwitching = false;
+
+		ObjectIntegrator& m_rObjectIntegrator = ObjectIntegrator::CreateAndGetRef();
+
+		GameFramework& m_rGameFramework = GameFramework::CreateAndGetRef();
 	};
 } 
 

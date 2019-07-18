@@ -2,9 +2,9 @@
 
 namespace gameframework
 {
-	HoldEffect::HoldEffect(const D3DXVECTOR3& startPosition)
+	HoldEffect::HoldEffect(const D3DXVECTOR3& startPosition, const TCHAR* pTexturePath)
 	{
-		m_partScheduler.Register(new DiffuseDifferenceSquare(_T("中空き円"), 0.2f, 0.03f, 0, Color(0xFF23FFFF), Color(0xFFFF23FF), startPosition));
+		m_partScheduler.Register(new DiffuseDifferenceSquare(pTexturePath, 0.2f, 0.03f, 0, Color(0xFF23FFFF), Color(0xFFFF23FF), startPosition));
 	}
 
 	HoldEffect::~HoldEffect()

@@ -33,6 +33,11 @@ namespace chargeshot
 		
 		bool AlreadyPassed(const tstring& keys);
 
+		inline std::vector<int>* GetPointsPointer()
+		{
+			return &m_points;
+		}
+
 		void Zero();
 
 		static const unsigned int POINT_MAX = 500;
@@ -67,6 +72,8 @@ namespace chargeshot
 
 		std::vector<tstring> m_keysTargetAlreadyCorrided;
 		std::vector<tstring> m_keysTargetAlreadyPassed;
+
+		std::vector<int> m_points;
 
 		unsigned int m_point = 0;
 		unsigned int m_totalPoint = 0;

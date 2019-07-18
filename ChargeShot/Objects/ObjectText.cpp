@@ -5,14 +5,14 @@ namespace chargeshot
 	using gameframework::GameFrameworkFactory;
 
 	ObjectText::ObjectText(const TCHAR* pFontKey, UINT format)
-		:pFONT_KEY(pFontKey), m_format(format)
+		:m_pFontKey(pFontKey), m_format(format)
 	{
 		InstantiateStream();
 	}
 
 	ObjectText::ObjectText(const TCHAR* pFontKey, const D3DXVECTOR2& topLeft,
 		const tstring& stream, UINT format, const Color& color)
-		:pFONT_KEY(pFontKey), m_format(format)
+		: m_pFontKey(pFontKey), m_format(format)
 	{
 		InstantiateStream();
 
@@ -33,7 +33,7 @@ namespace chargeshot
 
 	void ObjectText::Render()
 	{
-		m_pStream->Render(m_rGameFramework.GetFont(pFONT_KEY), m_format);
+		m_pStream->Render(m_rGameFramework.GetFont(m_pFontKey), m_format);
 	}
 
 	void ObjectText::SetTopLeft(const D3DXVECTOR2& topLeft)

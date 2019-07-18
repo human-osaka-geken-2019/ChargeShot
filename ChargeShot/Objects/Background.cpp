@@ -4,10 +4,10 @@ namespace chargeshot
 {
 	using namespace gameframework;
 
-	Background::Background(const TCHAR* pTextureKey, const D3DXVECTOR2& scrolling_sec)
+	Background::Background(const TCHAR* pTextureKey, const D3DXVECTOR2& scrolling_sec, float z)
 		:Object2D(pTextureKey), m_scrolling_sec(scrolling_sec)
 	{
-		FormVertices();
+		FormVertices(z);
 	}
 
 	Background::~Background()
@@ -30,13 +30,13 @@ namespace chargeshot
 		m_pVertices->SetTextureUVs(textureUVs);
 	}
 
-	void Background::FormVertices()
+	void Background::FormVertices(float z)
 	{
 		m_textureUVsTopLeft = { 0.0f, 0.0f };
 
 		D3DXVECTOR2 centerVector2 = WindowMeasure::GetNormalizeVector(50.0f);
 
-		D3DXVECTOR3 centerVector3(centerVector2.x, centerVector2.y, 1.0f);
+		D3DXVECTOR3 centerVector3(centerVector2.x, centerVector2.y, z);
 
 		m_pVertices->SetCenterAndSize(centerVector3, WindowMeasure::GetNormalize());
 	}
