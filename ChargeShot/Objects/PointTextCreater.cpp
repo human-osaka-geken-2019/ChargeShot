@@ -14,6 +14,15 @@ namespace chargeshot
 
 	}
 
+	void PointTextCreater::Update()
+	{
+		CreateTotalScoreString();
+
+		if (!m_rPointChecker.IsPointGot()) return;
+
+		CreateScoreString(m_rPointChecker.GetPoint(), 50);
+	}
+
 	void PointTextCreater::CreateTotalScoreString()
 	{
 		SetStream(_T("SCORE:"));
@@ -36,15 +45,6 @@ namespace chargeshot
 			WindowMeasure::GetNormalizeVector(60.0f, 65.0f), gradeText);
 
 		ObjectIntegrator::CreateAndGetRef().Register(pPointEvalutionText, LAYER_KIND::UI, 90);
-	}
-
-	void PointTextCreater::Update()
-	{
-		CreateTotalScoreString();
-
-		if (!m_rPointChecker.IsPointGot()) return;
-
-		CreateScoreString(m_rPointChecker.GetPoint(), 50);
 	}
 
 	void PointTextCreater::SetTopLeft()

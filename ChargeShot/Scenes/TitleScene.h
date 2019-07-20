@@ -9,6 +9,7 @@
 #include "Target.h"
 #include "FlashText.h"
 #include "GameTitle.h"
+#include "HighScoreText.h"
 
 namespace chargeshot
 {

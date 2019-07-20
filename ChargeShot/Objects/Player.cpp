@@ -163,7 +163,7 @@ namespace chargeshot
 	void Player::InstantiateCounter()
 	{
 		m_pSceneChageDelayCounter = new Counter_sec(1.2f);
-		m_pShotIntervalCounter = new Counter_sec(0.2f);
+		m_pShotIntervalCounter = new Counter_sec(0.6f);
 	}
 
 	void Player::InstantiateRemainingBulletText()

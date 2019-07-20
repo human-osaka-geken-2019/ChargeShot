@@ -1,6 +1,9 @@
 ﻿#ifndef POINT_CHECKER_H
 #define POINT_CHECKER_H
 
+#include <fstream>
+#include <iostream>
+#include <string>
 #include <vector>
 
 #include <GameFramework.h>
@@ -38,6 +41,16 @@ namespace chargeshot
 			return &m_points;
 		}
 
+		inline unsigned int GetHighScore()const
+		{
+			return m_highPoint;
+		}
+
+		inline bool GetUpdatedHighPoint()const
+		{
+			return m_updatedHighPoint;
+		}
+
 		void Zero();
 
 		static const unsigned int POINT_MAX = 500;
@@ -60,6 +73,11 @@ namespace chargeshot
 
 		void CalculatePoint();
 
+		void UpdateHighPoint();
+
+		void LoadHighPoint();
+		void WriteHighPoint();
+
 		ICollider* m_pTargetICollider = nullptr;
 
 		std::unordered_map<tstring, Vertices*> m_pBulletVerticesTmp;
@@ -77,6 +95,9 @@ namespace chargeshot
 
 		unsigned int m_point = 0;
 		unsigned int m_totalPoint = 0;
+
+		unsigned int m_highPoint = 0;
+		bool m_updatedHighPoint = false;
 
 		bool m_isPointGot = false;
 	};

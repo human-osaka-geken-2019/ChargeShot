@@ -25,22 +25,34 @@ namespace chargeshot
 		m_rObjectIntegrator.Register(new GameTitle(), LAYER_KIND::OPAQUENESS, -100);
 
 		tstring creditStrings =
-			_T("planer: haruraka tsujino\n\n")
-			_T("artist: haruraka tsujino\n\n")
-			_T("sound programer: masami sugao\n\n")
-			_T("sound programer: toshiya matsuoka\n\n")
-			_T("sound programer: harutaka tsujino\n\n")
-			_T("backend programmer: haruraka tsujino\n\n")
-			_T("application programmer: haruraka tsujino\n\n")
-			_T("sound: å¯â âπÉâÉ{\n\n")
-			_T("sound: ÉtÉäÅ[âπäyëfçﬁ H/MIX GALLERY óTòa èHéR");
+			_T("Åygame designÅz\n")
+			_T("harutaka tsujino\n\n")
+			_T("Åyapplication programÅz\n")
+			_T("harutaka tsujino\n\n")
+			_T("Åybackend programÅz\n")
+			_T("harutaka tsujino\n\n")
+			_T("ÅygraphicsÅz\n")
+			_T("harutaka tsujino\n\n")
+			_T("ÅyeffectsÅz\n")
+			_T("harutaka tsujino\n\n")
+			_T("Åysound programÅz\n")
+			_T("masami sugao\n")
+			_T("toshiya matsuoka\n")
+			_T("harutaka tsujino\n\n")
+			_T("ÅysoundÅz\n")
+			_T("å¯â âπÉâÉ{\n")
+			_T("ÉtÉäÅ[BGMÅEâπäyëfçﬁMusMus\n")
+			_T("ÉtÉäÅ[âπäyëfçﬁ H/MIX GALLERY óTòa èHéR\n")
+			_T("ÉtÉäÅ[BGM DOVA-SYNDROME ÉÜÉEÉL ç≤ãvä‘");
 
 		m_rObjectIntegrator.Register(
-			new FlashText(_T("INPUT_PROMPT"), 120, WindowMeasure::GetNormalizeVector(50.0f, 55.0f), _T("press enter to start"), DT_CENTER), LAYER_KIND::UI, 0);
+			new FlashText(_T("INPUT_PROMPT"), 120, WindowMeasure::GetNormalizeVector(50.0f, 55.0f), _T("press enter"), DT_CENTER),
+			LAYER_KIND::UI, 0);
 		m_rObjectIntegrator.Register(
-			new ObjectText(_T("CREDIT"), WindowMeasure::GetNormalizeVector(99.9f, 99.9f), creditStrings, DT_RIGHT | DT_BOTTOM, 0xFFFFFFFF), LAYER_KIND::UI, 0);
+			new ObjectText(_T("CREDIT"), WindowMeasure::GetNormalizeVector(99.9f, 99.9f), creditStrings, DT_RIGHT | DT_BOTTOM, 0xFFFFFFFF),
+			LAYER_KIND::UI, 0);
 		m_rObjectIntegrator.Register(
-			new ObjectText(_T("HIGH_SCORE"), WindowMeasure::GetNormalizeVector(2.95f, 15.0f), _T("HIGH SCORE: 4580"), DT_LEFT |DT_BOTTOM), LAYER_KIND::UI, 0);
+			new HighScoreText(_T("HIGH_SCORE"), WindowMeasure::GetNormalizeVector(2.95f, 15.0f), DT_LEFT | DT_BOTTOM), LAYER_KIND::UI, 0);
 
 		LoadResouces();
 

@@ -40,7 +40,7 @@ namespace chargeshot
 
 	void Bullet::Charge()
 	{
-		static const float SCALING_MAX = WindowMeasure::GetNormalizeX(20.0f);
+		static const auto SCALING_MAX = WindowMeasure::GetNormalizeX(20.0f);
 
 		RectSize size = RectSize(SCALING_MAX, SCALING_MAX) * m_pChargeCounter->Update();
 		m_pVertices->SetSize(size);
@@ -105,7 +105,7 @@ namespace chargeshot
 
 	bool Bullet::IsOutOfWindow()
 	{
-		float bulletLeftSidePosition = m_pVertices->GetCenter().x - 0.5f * m_pVertices->GetSize().m_width;
+		auto bulletLeftSidePosition = m_pVertices->GetCenter().x - 0.5f * m_pVertices->GetSize().m_width;
 
 		return WindowMeasure::GetNormalizeX(100.0f) < bulletLeftSidePosition;
 	}

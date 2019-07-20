@@ -6,6 +6,7 @@
 #include "Counter_sec.h"
 #include "PointTextCreater.h"
 #include "SceneFader.h"
+#include "SceneSwitchMediator.h"
 
 namespace chargeshot
 {

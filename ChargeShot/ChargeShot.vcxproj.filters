@@ -149,6 +149,9 @@
     <ClCompile Include="Objects\ResultPointTextCreater.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\HighScoreText.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Frameworks\ObjectIntegrator.h">
@@ -287,6 +290,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Objects\ResultPointTextCreater.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HighScoreText.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

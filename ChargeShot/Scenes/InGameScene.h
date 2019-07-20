@@ -3,6 +3,7 @@
 
 #include "Background.h"
 #include "CollisionChecker.h"
+#include "HighScoreText.h"
 #include "Player.h"
 #include "PointChecker.h"
 #include "PointTextCreater.h"

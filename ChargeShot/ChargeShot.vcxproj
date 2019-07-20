@@ -163,6 +163,7 @@
     <ClCompile Include="Objects\CollisionInformation.cpp" />
     <ClCompile Include="Objects\FlashText.cpp" />
     <ClCompile Include="Objects\GameTitle.cpp" />
+    <ClCompile Include="Objects\HighScoreText.cpp" />
     <ClCompile Include="Objects\InstantaneousText.cpp" />
     <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Objects\Object2D.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Objects\CollisionInformation.h" />
     <ClInclude Include="Objects\FlashText.h" />
     <ClInclude Include="Objects\GameTitle.h" />
+    <ClInclude Include="Objects\HighScoreText.h" />
     <ClInclude Include="Objects\InstantaneousText.h" />
     <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Objects\Object2D.h" />

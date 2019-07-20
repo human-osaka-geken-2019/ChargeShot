@@ -38,10 +38,25 @@ namespace chargeshot
 
 		if (m_pTotalScoreDispalyDelayCounter->Update() < 1.0f) return;
 
-		static_cast<ObjectText*>(this)->SetTopLeft(WindowMeasure::GetNormalizeVector(50.0f, 45.0f));
+		D3DXVECTOR2 topLeft = WindowMeasure::GetNormalizeVector(50.0f, 45.0f);
+
+		if (m_rPointChecker.GetUpdatedHighPoint())
+		{
+			SetStream(_T("New Best!!\nSCORE:"));
+			AddStream(totstring(m_rPointChecker.GetTotalPoint()));
+
+			topLeft.y -= WindowMeasure::GetNormalizeY(8.0f);
+		}
+
+		static_cast<ObjectText*>(this)->SetTopLeft(topLeft);
 
 		m_format = DT_CENTER;
 		m_pFontKey = _T("HIGH_SCORE_L");
+
+		if (m_rGameFramework.KeyboardIsPressed(DIK_RETURN))
+		{
+			SceneSwitchMediator::GetRef().SendSwitchEvent(SCENE_KIND::TITLE);
+		}
 
 		if (m_stagingEnd) return;
 

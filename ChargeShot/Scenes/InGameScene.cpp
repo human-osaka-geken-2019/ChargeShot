@@ -28,8 +28,10 @@ namespace chargeshot
 		m_rObjectIntegrator.Register(new Player(WindowMeasure::GetNormalizeVector(5.0f, 50.f)), LAYER_KIND::OPAQUENESS, 0);
 		m_rObjectIntegrator.Register(
 			new Target(
-				D3DXVECTOR3(WindowMeasure::GetNormalizeX(90.0f), 0.0f, 0.5f), WindowMeasure::GetNormalize(5.0f, 10.0f), 3.0f),
+				D3DXVECTOR3(WindowMeasure::GetNormalizeX(90.0f), 0.0f, 0.5f), WindowMeasure::GetNormalize(5.0f, 10.0f), 4.0f),
 			LAYER_KIND::OPAQUENESS, 0);
+		m_rObjectIntegrator.Register(
+			new HighScoreText(_T("POINT_M"), WindowMeasure::GetNormalizeVector(99.5f, 1.0f), DT_RIGHT), LAYER_KIND::UI, 0);
 
 		LoadResouces();
 

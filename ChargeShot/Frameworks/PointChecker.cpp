@@ -6,11 +6,13 @@ namespace chargeshot
 
 	PointChecker::~PointChecker()
 	{
-
+		WriteHighPoint();
 	}
 
 	void PointChecker::Update()
 	{
+		UpdateHighPoint();
+		
 		m_isPointGot = false;
 
 		GetKeyTargetCollided();
@@ -63,6 +65,8 @@ namespace chargeshot
 	{
 		m_totalPoint = m_point = 0;
 
+		m_updatedHighPoint = false;
+
 		m_keysTargetAlreadyCorrided.clear();
 
 		m_keysTargetAlreadyPassed.clear();
@@ -72,7 +76,7 @@ namespace chargeshot
 
 	PointChecker::PointChecker()
 	{
-
+		LoadHighPoint();
 	}
 
 	void PointChecker::GetKeyTargetCollided()
@@ -182,5 +186,33 @@ namespace chargeshot
 
 			m_isPointGot = true;
 		}
+	}
+
+	void PointChecker::UpdateHighPoint()
+	{
+		if (m_totalPoint <= m_highPoint) return;
+	
+		m_highPoint = m_totalPoint;
+
+		m_updatedHighPoint = true;
+	}
+
+	void PointChecker::LoadHighPoint()
+	{
+		std::ifstream ifs("HighScore.txt");
+		std::string highScore;
+
+		getline(ifs, highScore);
+
+		auto ss = std::istringstream(highScore);
+
+		ss >> m_highPoint;
+	}
+
+	void PointChecker::WriteHighPoint()
+	{
+		std::ofstream ofs("HighScore.txt");
+
+		ofs << m_highPoint << std::endl;
 	}
 }
